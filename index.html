@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Elas Azulejista</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
       margin: 0;
@@ -109,6 +109,62 @@
     .whatsapp-float:hover {
       background: #1ebc59;
     }
+
+    /* Estilos para formulário e login */
+    #formBox, #loginBox, #listBox {
+      max-width: 500px;
+      background: white;
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    }
+
+    input, textarea {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #222;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #444;
+    }
+
+    /* Estilos tabela cadastros */
+    #listBox {
+      max-width: 800px;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+      font-size: 14px;
+    }
+    th {
+      background: #eee;
+    }
   </style>
 </head>
 <body>
@@ -116,10 +172,11 @@
   <header>
     <div class="logo">Elas Azulejista</div>
     <div class="menu">
-      <button class="menu-button">Home</button>
+      <button class="menu-button">Menu</button>
       <div class="dropdown">
-        <a href="#">Cadastro Cliente</a>
-        <a href="#">Forma Pagamento</a>
+        <a href="#formBox">Cadastro Cliente</a>
+        <a href="#" onclick="mostrarLogin()">Área Administrativa</a>
+        <a href="#" onclick="logout()">Sair</a>
       </div>
     </div>
   </header>
@@ -133,10 +190,10 @@
   </div>
 
   <div class="gallery">
-    <img src="https://raw.githubusercontent.com/9481A24/Azulejistaprofissional/main/Statuario120x240lastra-battutodilistelli-seminatoditesserelapp.amb.hall_v1_current_2000x.jpg" alt="Imagem 1">
-    <img src="https://raw.githubusercontent.com/9481A24/Azulejistaprofissional/main/images%20(6).jpeg" alt="Imagem 2">
-    <img src="https://raw.githubusercontent.com/9481A24/Azulejistaprofissional/main/Marmi_Invisdible_Grey_Large_Format_Porcelain_Tile_MM110_-_room_x700%20(1).png" alt="Imagem 3">
-    <img src="https://raw.githubusercontent.com/9481A24/Azulejistaprofissional/main/images%20(3).jpeg" alt="Imagem 4">
+    <img src="https://raw.githubusercontent.com/9481A24/Azulejistaprofissional/main/Statuario120x240lastra-battutodilistelli-seminatoditesserelapp.amb.hall_v1_current_2000x.jpg" alt="Imagem 1" />
+    <img src="https://raw.githubusercontent.com/9481A24/Azulejistaprofissional/main/images%20(6).jpeg" alt="Imagem 2" />
+    <img src="https://raw.githubusercontent.com/9481A24/Azulejistaprofissional/main/Marmi_Invisdible_Grey_Large_Format_Porcelain_Tile_MM110_-_room_x700%20(1).png" alt="Imagem 3" />
+    <img src="https://raw.githubusercontent.com/9481A24/Azulejistaprofissional/main/images%20(3).jpeg" alt="Imagem 4" />
   </div>
 
   <div class="map">
@@ -146,6 +203,147 @@
   </div>
 
   <a class="whatsapp-float" href="https://wa.me/55319996126215" target="_blank">📞</a>
+
+  <!-- Formulário Cadastro -->
+  <div id="formBox">
+    <h3>Cadastro de Cliente</h3>
+    <input type="text" id="nome" placeholder="Nome do Cliente" />
+    <input type="tel" id="telefone" placeholder="Telefone" />
+    <input type="text" id="endereco" placeholder="Endereço" />
+    <textarea id="servico" placeholder="Serviço feito"></textarea>
+    <button onclick="salvarCadastro()">Salvar</button>
+  </div>
+
+  <!-- Login Admin -->
+  <div id="loginBox" style="display:none;">
+    <h3>Área Administrativa - Login</h3>
+    <input type="text" id="user" placeholder="Usuário" />
+    <input type="password" id="pass" placeholder="Senha" />
+    <button onclick="login()">Entrar</button>
+  </div>
+
+  <!-- Lista de Cadastros -->
+  <div id="listBox" style="display:none;">
+    <h3>Cadastros Feitos</h3>
+    <table id="tabelaCadastros">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Telefone</th>
+          <th>Endereço</th>
+          <th>Serviço feito</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    // Configuração do Firebase (projeto público de teste)
+    const firebaseConfig = {
+      apiKey: "AIzaSyDp8BMu69Il0SCcp-j-SjyZs6-YkTUlMms",
+      authDomain: "genesis-azulejista.firebaseapp.com",
+      projectId: "genesis-azulejista",
+      storageBucket: "genesis-azulejista.appspot.com",
+      messagingSenderId: "517278488826",
+      appId: "1:517278488826:web:c27ed102e9f479e3a6ddc6"
+    };
+
+    // Inicializa Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Salvar cadastro no Firebase
+    function salvarCadastro() {
+      const nome = document.getElementById('nome').value.trim();
+      const telefone = document.getElementById('telefone').value.trim();
+      const endereco = document.getElementById('endereco').value.trim();
+      const servico = document.getElementById('servico').value.trim();
+
+      if (!nome || !telefone || !endereco || !servico) {
+        alert('Por favor, preencha todos os campos.');
+        return;
+      }
+
+      db.collection("cadastros").add({
+        nome,
+        telefone,
+        endereco,
+        servico,
+        criadoEm: new Date()
+      })
+      .then(() => {
+        alert("Cadastro salvo com sucesso!");
+        document.getElementById('nome').value = "";
+        document.getElementById('telefone').value = "";
+        document.getElementById('endereco').value = "";
+        document.getElementById('servico').value = "";
+      })
+      .catch((error) => {
+        alert("Erro ao salvar cadastro: " + error);
+      });
+    }
+
+    // Mostrar área de login
+    function mostrarLogin() {
+      document.getElementById('loginBox').style.display = 'block';
+      document.getElementById('formBox').style.display = 'none';
+      document.getElementById('listBox').style.display = 'none';
+      window.scrollTo(0,document.body.scrollHeight);
+    }
+
+    // Login Admin simples
+    function login() {
+      const user = document.getElementById('user').value;
+      const pass = document.getElementById('pass').value;
+
+      if(user === 'admin' && pass === 'admin123'){
+        document.getElementById('loginBox').style.display = 'none';
+        document.getElementById('formBox').style.display = 'none';
+        document.getElementById('listBox').style.display = 'block';
+        carregarCadastros();
+      } else {
+        alert("Usuário ou senha incorretos.");
+      }
+    }
+
+    // Logout para voltar ao formulário
+    function logout() {
+      document.getElementById('loginBox').style.display = 'none';
+      document.getElementById('formBox').style.display = 'block';
+      document.getElementById('listBox').style.display = 'none';
+    }
+
+    // Carregar cadastros do Firebase e mostrar na tabela
+    function carregarCadastros() {
+      const tbody = document.querySelector("#tabelaCadastros tbody");
+      tbody.innerHTML = "";
+
+      db.collection("cadastros").orderBy("criadoEm", "desc").get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const tr = document.createElement("tr");
+
+            tr.innerHTML = `
+              <td>${data.nome}</td>
+              <td>${data.telefone}</td>
+              <td>${data.endereco}</td>
+              <td>${data.servico}</td>
+            `;
+
+            tbody.appendChild(tr);
+          });
+        })
+        .catch((error) => {
+          alert("Erro ao carregar cadastros: " + error);
+        });
+    }
+  </script>
 
 </body>
 </html>
