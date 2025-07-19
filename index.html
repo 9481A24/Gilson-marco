@@ -19,7 +19,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: relative;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .logo {
@@ -27,97 +29,28 @@
       font-weight: bold;
     }
 
-    .menu {
-      position: relative;
-    }
-
-    .menu-button {
+    .menu-buttons button {
       background: #444;
       border: none;
       color: white;
       padding: 10px 15px;
       cursor: pointer;
       font-size: 16px;
+      margin-left: 10px;
+      border-radius: 4px;
     }
 
-    .dropdown {
-      display: none;
-      position: absolute;
-      right: 0;
-      background-color: white;
-      color: #222;
-      box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-      z-index: 1;
+    .menu-buttons button:hover {
+      background: #555;
     }
 
-    .dropdown a {
-      display: block;
-      padding: 10px 15px;
-      text-decoration: none;
-      color: #222;
-    }
-
-    .dropdown a:hover {
-      background: #eee;
-    }
-
-    .menu:hover .dropdown {
-      display: block;
-    }
-
-    .content {
-      padding: 20px;
-      text-align: center;
-    }
-
-    .content h2 {
-      color: #222;
-      margin-bottom: 10px;
-    }
-
-    .content p {
-      max-width: 700px;
-      margin: auto;
-      font-size: 18px;
-      line-height: 1.5;
-      color: #555;
-    }
-
-    .gallery img {
-      width: 100%;
-      margin-top: 20px;
-    }
-
-    .map {
-      margin-top: 40px;
-    }
-
-    .whatsapp-float {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #25d366;
-      color: white;
-      border-radius: 50%;
-      padding: 15px;
-      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
-      font-size: 24px;
-      text-decoration: none;
-      z-index: 10;
-    }
-
-    .whatsapp-float:hover {
-      background: #1ebc59;
-    }
-
-    /* Estilos para formulário e login */
     #formBox, #loginBox, #listBox {
-      max-width: 500px;
+      max-width: 600px;
       background: white;
       margin: 30px auto;
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     input, textarea {
@@ -146,204 +79,218 @@
       background: #444;
     }
 
-    /* Estilos tabela cadastros */
     #listBox {
       max-width: 800px;
       overflow-x: auto;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 10px;
     }
+
     th, td {
       border: 1px solid #ccc;
       padding: 8px;
       text-align: left;
       font-size: 14px;
     }
+
     th {
       background: #eee;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25d366;
+      color: white;
+      border-radius: 50%;
+      padding: 15px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+      font-size: 24px;
+      text-decoration: none;
+      z-index: 10;
+    }
+
+    .whatsapp-float:hover {
+      background: #1ebc59;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">Elas Azulejista</div>
-    <div class="menu">
-      <button class="menu-button">Menu</button>
-      <div class="dropdown">
-        <a href="#formBox">Cadastro Cliente</a>
-        <a href="#" onclick="mostrarLogin()">Área Administrativa</a>
-        <a href="#" onclick="logout()">Sair</a>
-      </div>
-    </div>
-  </header>
-
-  <div class="content">
-    <h2>Transformamos seu sonho em realidade</h2>
-    <p>
-      Oferecemos serviços especializados em <strong>porcelanato, elétrica e iluminação, gesso e hidráulica</strong>.
-      Tudo com acabamento impecável, atendimento humanizado e <strong>preço justo</strong>. Conte com nossa equipe feminina para entregar sua reforma com agilidade, segurança e qualidade de alto padrão.
-    </p>
+<header>
+  <div class="logo">Elas Azulejista</div>
+  <div class="menu-buttons">
+    <button onclick="mostrarFormulario()">Cadastro Cliente</button>
+    <button onclick="mostrarLogin()">Área Administrativa</button>
+    <button onclick="logout()">Sair</button>
   </div>
+</header>
 
-  <div class="gallery">
-    <img src="https://raw.githubusercontent.com/9481A24/Azulejistaprofissional/main/Statuario120x240lastra-battutodilistelli-seminatoditesserelapp.amb.hall_v1_current_2000x.jpg" alt="Imagem 1" />
-    <img src="https://raw.githubusercontent.com/9481A24/Azulejistaprofissional/main/images%20(6).jpeg" alt="Imagem 2" />
-    <img src="https://raw.githubusercontent.com/9481A24/Azulejistaprofissional/main/Marmi_Invisdible_Grey_Large_Format_Porcelain_Tile_MM110_-_room_x700%20(1).png" alt="Imagem 3" />
-    <img src="https://raw.githubusercontent.com/9481A24/Azulejistaprofissional/main/images%20(3).jpeg" alt="Imagem 4" />
-  </div>
+<div class="content">
+  <h2>Transformamos seu sonho em realidade</h2>
+  <p style="max-width: 700px; margin: auto; font-size: 18px; line-height: 1.5; color: #555;">
+    Oferecemos serviços especializados em <strong>porcelanato, elétrica e iluminação, gesso e hidráulica</strong>.
+    Tudo com acabamento impecável, atendimento humanizado e <strong>preço justo</strong>. Conte com nossa equipe feminina para entregar sua reforma com agilidade, segurança e qualidade de alto padrão.
+  </p>
+</div>
 
-  <div class="map">
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.9490441589077!2d-43.9378!3d-19.9191!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690b8cf758c13%3A0x3eb0dbcd13c5e96f!2sBelo%20Horizonte%2C%20MG!5e0!3m2!1spt-BR!2sbr!4v1623148357761"
-      width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-  </div>
+<div class="gallery" style="max-width: 700px; margin: 30px auto;">
+  <img src="https://raw.githubusercontent.com/9481A24/Azulejistaprofissional/main/Statuario120x240lastra-battutodilistelli-seminatoditesserelapp.amb.hall_v1_current_2000x.jpg" alt="Imagem 1" style="width: 100%; margin-top: 20px;" />
+  <img src="https://raw.githubusercontent.com/9481A24/Azulejistaprofissional/main/images%20(6).jpeg" alt="Imagem 2" style="width: 100%; margin-top: 20px;" />
+  <img src="https://raw.githubusercontent.com/9481A24/Azulejistaprofissional/main/Marmi_Invisdible_Grey_Large_Format_Porcelain_Tile_MM110_-_room_x700%20(1).png" alt="Imagem 3" style="width: 100%; margin-top: 20px;" />
+  <img src="https://raw.githubusercontent.com/9481A24/Azulejistaprofissional/main/images%20(3).jpeg" alt="Imagem 4" style="width: 100%; margin-top: 20px;" />
+</div>
 
-  <a class="whatsapp-float" href="https://wa.me/55319996126215" target="_blank">📞</a>
+<div class="map" style="max-width:700px; margin: 40px auto;">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.9490441589077!2d-43.9378!3d-19.9191!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa690b8cf758c13%3A0x3eb0dbcd13c5e96f!2sBelo%20Horizonte%2C%20MG!5e0!3m2!1spt-BR!2sbr!4v1623148357761"
+    width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+</div>
 
-  <!-- Formulário Cadastro -->
-  <div id="formBox">
-    <h3>Cadastro de Cliente</h3>
-    <input type="text" id="nome" placeholder="Nome do Cliente" />
-    <input type="tel" id="telefone" placeholder="Telefone" />
-    <input type="text" id="endereco" placeholder="Endereço" />
-    <textarea id="servico" placeholder="Serviço feito"></textarea>
-    <button onclick="salvarCadastro()">Salvar</button>
-  </div>
+<a class="whatsapp-float" href="https://wa.me/55319996126215" target="_blank">📞</a>
 
-  <!-- Login Admin -->
-  <div id="loginBox" style="display:none;">
-    <h3>Área Administrativa - Login</h3>
-    <input type="text" id="user" placeholder="Usuário" />
-    <input type="password" id="pass" placeholder="Senha" />
-    <button onclick="login()">Entrar</button>
-  </div>
+<!-- Formulário Cadastro -->
+<div id="formBox" style="display:block;">
+  <h3>Cadastro de Cliente</h3>
+  <input type="text" id="nome" placeholder="Nome do Cliente" />
+  <input type="tel" id="telefone" placeholder="Telefone" />
+  <input type="text" id="endereco" placeholder="Endereço" />
+  <textarea id="servico" placeholder="Serviço feito"></textarea>
+  <button onclick="salvarCadastro()">Salvar</button>
+</div>
 
-  <!-- Lista de Cadastros -->
-  <div id="listBox" style="display:none;">
-    <h3>Cadastros Feitos</h3>
-    <table id="tabelaCadastros">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Telefone</th>
-          <th>Endereço</th>
-          <th>Serviço feito</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
+<!-- Login Admin -->
+<div id="loginBox" style="display:none;">
+  <h3>Área Administrativa - Login</h3>
+  <input type="text" id="user" placeholder="Usuário" />
+  <input type="password" id="pass" placeholder="Senha" />
+  <button onclick="login()">Entrar</button>
+</div>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<!-- Lista de Cadastros -->
+<div id="listBox" style="display:none;">
+  <h3>Cadastros Feitos</h3>
+  <table id="tabelaCadastros">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>Endereço</th>
+        <th>Serviço feito</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
 
-  <script>
-    // Configuração do Firebase (projeto público de teste)
-    const firebaseConfig = {
-      apiKey: "AIzaSyDp8BMu69Il0SCcp-j-SjyZs6-YkTUlMms",
-      authDomain: "genesis-azulejista.firebaseapp.com",
-      projectId: "genesis-azulejista",
-      storageBucket: "genesis-azulejista.appspot.com",
-      messagingSenderId: "517278488826",
-      appId: "1:517278488826:web:c27ed102e9f479e3a6ddc6"
-    };
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-    // Inicializa Firebase
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+<script>
+  // Config Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyDp8BMu69Il0SCcp-j-SjyZs6-YkTUlMms",
+    authDomain: "genesis-azulejista.firebaseapp.com",
+    projectId: "genesis-azulejista",
+    storageBucket: "genesis-azulejista.appspot.com",
+    messagingSenderId: "517278488826",
+    appId: "1:517278488826:web:c27ed102e9f479e3a6ddc6"
+  };
 
-    // Salvar cadastro no Firebase
-    function salvarCadastro() {
-      const nome = document.getElementById('nome').value.trim();
-      const telefone = document.getElementById('telefone').value.trim();
-      const endereco = document.getElementById('endereco').value.trim();
-      const servico = document.getElementById('servico').value.trim();
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
 
-      if (!nome || !telefone || !endereco || !servico) {
-        alert('Por favor, preencha todos os campos.');
-        return;
-      }
+  function mostrarFormulario(){
+    document.getElementById('formBox').style.display = 'block';
+    document.getElementById('loginBox').style.display = 'none';
+    document.getElementById('listBox').style.display = 'none';
+  }
 
-      db.collection("cadastros").add({
-        nome,
-        telefone,
-        endereco,
-        servico,
-        criadoEm: new Date()
-      })
-      .then(() => {
-        alert("Cadastro salvo com sucesso!");
-        document.getElementById('nome').value = "";
-        document.getElementById('telefone').value = "";
-        document.getElementById('endereco').value = "";
-        document.getElementById('servico').value = "";
+  function mostrarLogin(){
+    document.getElementById('formBox').style.display = 'none';
+    document.getElementById('loginBox').style.display = 'block';
+    document.getElementById('listBox').style.display = 'none';
+  }
+
+  function logout(){
+    document.getElementById('formBox').style.display = 'block';
+    document.getElementById('loginBox').style.display = 'none';
+    document.getElementById('listBox').style.display = 'none';
+  }
+
+  function salvarCadastro(){
+    const nome = document.getElementById('nome').value.trim();
+    const telefone = document.getElementById('telefone').value.trim();
+    const endereco = document.getElementById('endereco').value.trim();
+    const servico = document.getElementById('servico').value.trim();
+
+    if(!nome || !telefone || !endereco || !servico){
+      alert('Preencha todos os campos!');
+      return;
+    }
+
+    db.collection("cadastros").add({
+      nome,
+      telefone,
+      endereco,
+      servico,
+      criadoEm: new Date()
+    })
+    .then(() => {
+      alert('Cadastro salvo com sucesso!');
+      document.getElementById('nome').value = '';
+      document.getElementById('telefone').value = '';
+      document.getElementById('endereco').value = '';
+      document.getElementById('servico').value = '';
+    })
+    .catch((error) => {
+      alert('Erro ao salvar cadastro: ' + error);
+    });
+  }
+
+  function login(){
+    const user = document.getElementById('user').value;
+    const pass = document.getElementById('pass').value;
+
+    if(user === 'admin' && pass === 'admin123'){
+      document.getElementById('loginBox').style.display = 'none';
+      document.getElementById('formBox').style.display = 'none';
+      document.getElementById('listBox').style.display = 'block';
+      carregarCadastros();
+    } else {
+      alert('Usuário ou senha incorretos.');
+    }
+  }
+
+  function carregarCadastros(){
+    const tbody = document.querySelector('#tabelaCadastros tbody');
+    tbody.innerHTML = '';
+
+    db.collection("cadastros").orderBy("criadoEm", "desc").get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${data.nome}</td>
+            <td>${data.telefone}</td>
+            <td>${data.endereco}</td>
+            <td>${data.servico}</td>
+          `;
+          tbody.appendChild(tr);
+        });
       })
       .catch((error) => {
-        alert("Erro ao salvar cadastro: " + error);
+        alert('Erro ao carregar cadastros: ' + error);
       });
-    }
-
-    // Mostrar área de login
-    function mostrarLogin() {
-      document.getElementById('loginBox').style.display = 'block';
-      document.getElementById('formBox').style.display = 'none';
-      document.getElementById('listBox').style.display = 'none';
-      window.scrollTo(0,document.body.scrollHeight);
-    }
-
-    // Login Admin simples
-    function login() {
-      const user = document.getElementById('user').value;
-      const pass = document.getElementById('pass').value;
-
-      if(user === 'admin' && pass === 'admin123'){
-        document.getElementById('loginBox').style.display = 'none';
-        document.getElementById('formBox').style.display = 'none';
-        document.getElementById('listBox').style.display = 'block';
-        carregarCadastros();
-      } else {
-        alert("Usuário ou senha incorretos.");
-      }
-    }
-
-    // Logout para voltar ao formulário
-    function logout() {
-      document.getElementById('loginBox').style.display = 'none';
-      document.getElementById('formBox').style.display = 'block';
-      document.getElementById('listBox').style.display = 'none';
-    }
-
-    // Carregar cadastros do Firebase e mostrar na tabela
-    function carregarCadastros() {
-      const tbody = document.querySelector("#tabelaCadastros tbody");
-      tbody.innerHTML = "";
-
-      db.collection("cadastros").orderBy("criadoEm", "desc").get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            const tr = document.createElement("tr");
-
-            tr.innerHTML = `
-              <td>${data.nome}</td>
-              <td>${data.telefone}</td>
-              <td>${data.endereco}</td>
-              <td>${data.servico}</td>
-            `;
-
-            tbody.appendChild(tr);
-          });
-        })
-        .catch((error) => {
-          alert("Erro ao carregar cadastros: " + error);
-        });
-    }
-  </script>
+  }
+</script>
 
 </body>
 </html>
