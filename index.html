@@ -248,8 +248,13 @@
   <main class="content-area" id="mainContent">
     <h2>Transformamos seu sonho em realidade</h2>
     <p>
-      Oferecemos serviços especializados em <strong>porcelanato, elétrica e iluminação, gesso e hidráulica</strong>.
-      Tudo com acabamento impecável, atendimento humanizado e <strong>preço justo</strong>. Conte com nossa equipe feminina para entregar sua reforma com agilidade, segurança e qualidade de alto padrão.
+      <!-- ALTERADO AQUI -->
+      Oferecemos serviços especializados em 
+      <strong style="color: blue;">porcelanato</strong>, 
+      <strong style="color: blue;">elétrica e iluminação</strong>, 
+      <strong style="color: blue;">gesso e hidráulica</strong>. 
+      Tudo com acabamento impecável, atendimento humanizado e 
+      <strong>preço justo</strong>. Conte com nossa equipe feminina para entregar sua reforma com agilidade, segurança e qualidade de alto padrão.
     </p>
 
     <div class="gallery">
@@ -274,7 +279,6 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
 <script>
-  // Firebase config
   const firebaseConfig = {
     apiKey: "AIzaSyDp8BMu69Il0SCcp-j-SjyZs6-YkTUlMms",
     authDomain: "genesis-azulejista.firebaseapp.com",
@@ -286,7 +290,6 @@
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 
-  // Toggle sidebar menu
   const btnToggleSidebar = document.getElementById('btnToggleSidebar');
   const sidebar = document.getElementById('sidebar');
   const mainContent = document.getElementById('mainContent');
@@ -296,7 +299,6 @@
     mainContent.classList.toggle('sidebar-open');
   });
 
-  // Mostrar as seções do menu
   function mostrarFormulario(){
     document.getElementById('formBox').classList.add('active');
     document.getElementById('loginBox').classList.remove('active');
@@ -314,7 +316,6 @@
     document.querySelector('#tabelaCadastros tbody').innerHTML = '';
   }
 
-  // Salvar cadastro
   function salvarCadastro(){
     const nome = document.getElementById('nome').value.trim();
     const telefone = document.getElementById('telefone').value.trim();
@@ -345,7 +346,6 @@
     });
   }
 
-  // Login admin simples
   function login(){
     const user = document.getElementById('user').value.trim();
     const pass = document.getElementById('pass').value.trim();
@@ -360,7 +360,6 @@
     }
   }
 
-  // Carregar cadastros e mostrar tabela
   function carregarCadastros(){
     const tbody = document.querySelector('#tabelaCadastros tbody');
     tbody.innerHTML = '';
