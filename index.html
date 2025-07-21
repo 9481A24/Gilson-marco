@@ -12,6 +12,7 @@
       background: #000;
       color: white;
       padding-top: 70px; /* Para evitar sobrepor o header fixo */
+      padding-bottom: 40px; /* Para evitar que conteúdo fique atrás do rodapé */
     }
 
     header {
@@ -140,6 +141,51 @@
       margin: 20px auto;
       border-radius: 8px;
     }
+
+    /* Rodapé */
+    footer {
+      background-color: #111;
+      color: white;
+      padding: 10px 0 10px 20px; /* cima direita baixo esquerda */
+      text-align: left;
+      font-size: 14px;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      border-top: 1px solid #444;
+      box-sizing: border-box;
+      z-index: 1000;
+    }
+
+    /* Botão WhatsApp flutuante */
+    .whatsapp-float {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 80px; /* acima do rodapé */
+      right: 20px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+      z-index: 10000;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .whatsapp-float:hover {
+      background-color: #128c4a;
+    }
+
+    .whatsapp-float img {
+      width: 32px;
+      height: 32px;
+    }
   </style>
 </head>
 <body>
@@ -179,6 +225,15 @@
     <img src="https://github.com/Andriele2025/Botoes/raw/main/hero_barrel-riot.jpg.webp" alt="Imagem 4" />
   </div>
 
+  <footer>
+    <p>CNPJ: 12.345.678/0001-90</p>
+  </footer>
+
+  <!-- Botão WhatsApp flutuante -->
+  <a href="https://wa.me/5532995439612" target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+  </a>
+
   <script>
     function abrirMenu() {
       document.getElementById('menuTelaInteira').classList.add('open');
@@ -204,4 +259,4 @@
 
 </body>
 </html>
-  
+
